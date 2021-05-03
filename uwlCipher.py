@@ -160,11 +160,11 @@ def caesarDecrypt(message, key):
     return result
 
 def uwlEncrypt(input, shift = 0):
-    message = caesarEncrypt(input, 10)
+    input = caesarEncrypt(input, 10)
 
     encrypted = ''
 
-    for x in message:
+    for x in input:
         encrypted += library[(ord(x) + shift) % 128] + " "
 
     return encrypted
@@ -179,6 +179,9 @@ def uwlDecrypt(encrypted, key = 0):
         return 'Message cannot be decrypted'
 
     return caesarDecrypt(decrypted, 10)
+
+    # return without decrypting in Caesar
+    return decrypted
 
 message = 'ABC 123 *'
 key = 447
