@@ -129,7 +129,7 @@ library = [
     'ClaireAnderson',
 ]
 
-def caeserEncrypt(message, key):
+def caesarEncrypt(message, key):
     message = message.upper()
     alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgijklmnopqrstuvwxyz123456789*-+"
     result = ""
@@ -144,7 +144,7 @@ def caeserEncrypt(message, key):
 
     return result
 
-def caeserDecrypt(message, key):
+def caesarDecrypt(message, key):
     message = message.upper()
     alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgijklmnopqrstuvwxyz123456789*-+"
     result = ""
@@ -160,7 +160,7 @@ def caeserDecrypt(message, key):
     return result
 
 def uwlEncrypt(input, shift = 0):
-    message = caeserEncrypt(input, 10)
+    message = caesarEncrypt(input, 10)
 
     encrypted = ''
 
@@ -178,7 +178,7 @@ def uwlDecrypt(encrypted, key = 0):
     except:
         return 'Message cannot be decrypted'
 
-    return caeserDecrypt(decrypted, 10)
+    return caesarDecrypt(decrypted, 10)
 
 message = 'ABC 123 *'
 key = 447
