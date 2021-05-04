@@ -129,14 +129,16 @@ library = [
     'ClaireAnderson',
 ]
 
-def caesarEncrypt(message, key):
+
+def caesarEncrypt(message, key=0):
     result = ""
     for x in message:
         result += chr((ord(x) + key) % 128)
 
     return result
 
-def caesarDecrypt(input, key):
+
+def caesarDecrypt(input, key=0):
     decrypted = ""
 
     for x in input:
@@ -144,17 +146,19 @@ def caesarDecrypt(input, key):
 
     return decrypted
 
-def uwlEncrypt(input, shift = 0):
-    input = caesarEncrypt(input, 10)
+
+def uwlEncrypt(input, key=0):
+    input = caesarEncrypt(input, key)
 
     encrypted = ''
 
     for x in input:
-        encrypted += library[(ord(x) + shift) % 128] + " "
+        encrypted += library[(ord(x) + key) % 128] + " "
 
     return encrypted
 
-def uwlDecrypt(encrypted, key = 0):
+
+def uwlDecrypt(encrypted, key=0):
     decrypted = ''
 
     try:
@@ -163,18 +167,22 @@ def uwlDecrypt(encrypted, key = 0):
     except:
         return 'Message cannot be decrypted'
 
-    return caesarDecrypt(decrypted, 10)
+    return caesarDecrypt(decrypted, key)
 
-    # return without decrypting in Caesar
     return decrypted
 
-message = 'ABC 123 *'
-key = 447
+f = open("demoEmail.txt", "r")
 
-secret = uwlEncrypt(message, key)
+encryptedEmail = uwlEncrypt(f.read(), 1)
 
-print('ABC 123 * encrypted:')
-print(secret)
+print(uwlDecrypt(encryptedEmail, 1))
 
-print('ABC 123 * decrypted:')
-print(uwlDecrypt(secret, key))
+# message = ""
+#
+# secret = uwlEncrypt(message, key)
+#
+# print('ABC 123 * encrypted:')
+# print(secret)
+#
+# print('ABC 123 * decrypted:')
+# print(uwlDecrypt(secret, key))
