@@ -130,34 +130,19 @@ library = [
 ]
 
 def caesarEncrypt(message, key):
-    message = message.upper()
-    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgijklmnopqrstuvwxyz123456789*-+"
     result = ""
-
-    for letter in message:
-        if letter in alpha:
-            letter_index = (alpha.find(letter) + key) % len(alpha)
-
-            result = result + alpha[letter_index]
-        else:
-            result = result + letter
+    for x in message:
+        result += chr((ord(x) + key) % 128)
 
     return result
 
-def caesarDecrypt(message, key):
-    message = message.upper()
-    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgijklmnopqrstuvwxyz123456789*-+"
-    result = ""
+def caesarDecrypt(input, key):
+    decrypted = ""
 
-    for letter in message:
-        if letter in alpha:
-            letter_index = (alpha.find(letter) - key) % len(alpha)
+    for x in input:
+        decrypted += chr((ord(x) - key) % 128)
 
-            result = result + alpha[letter_index]
-        else:
-            result = result + letter
-
-    return result
+    return decrypted
 
 def uwlEncrypt(input, shift = 0):
     input = caesarEncrypt(input, 10)
