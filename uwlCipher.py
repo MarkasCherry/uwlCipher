@@ -147,35 +147,33 @@ def caesarDecrypt(input, key=0):
     return decrypted
 
 
-def uwlEncrypt(input, key=0, password=None):
-    input = caesarEncrypt(input, key)
+def uwlEncrypt(input, firstKey=0, secondKey=0):
+    input = caesarEncrypt(input, secondKey)
 
     encrypted = ''
 
     for x in input:
-        encrypted += library[(ord(x) + key) % 128] + " "
+        encrypted += library[(ord(x) + firstKey) % 128] + " "
 
     return encrypted
 
 
-def uwlDecrypt(encrypted, key=0):
+def uwlDecrypt(encrypted, firstKey=0, secondKey=0):
     decrypted = ''
 
     try:
         for x in encrypted.split():
-            decrypted += chr((library.index(x) - key) % 128)
+            decrypted += chr((library.index(x) - firstKey) % 128)
     except:
         return 'Message cannot be decrypted'
 
-    return caesarDecrypt(decrypted, key)
-
-    return decrypted
+    return caesarDecrypt(decrypted, secondKey)
 
 
 f = open("demoEmail.txt", "r")
 
-encryptedEmail = uwlEncrypt(f.read(), 1)
+encryptedEmail = uwlEncrypt(f.read(), 156, 663)
 
 print(encryptedEmail)
 
-print(uwlDecrypt(encryptedEmail, 1))
+print(uwlDecrypt(encryptedEmail, 156, 663))
