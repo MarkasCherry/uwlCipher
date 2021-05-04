@@ -6,25 +6,23 @@ It changes characters to the specific name of a University of West London staff 
 
 **How to use?**
 
-At this point the cipher is incomplete, we are still testing it.
+This is the 2.0 version of the script, it still can be updated
 
 At the end of the script you will find this code for testing:
 
 `````
-message = 'ABC 123 *'
+f = open("demoEmail.txt", "r")
 
-secret = uwlEncrypt(message, 447)
+encryptedEmail = uwlEncrypt(f.read(), 156, 663)
 
-print('ABC 123 * encrypted:')
+print(encryptedEmail)
 
-print(secret)
-
-print('ABC 123 * decrypted:')
-
-print(uwlDecrypt(secret, 447))
+print(uwlDecrypt(encryptedEmail, 156, 663))
 `````
 
-Try changing the message and the key varibles to try out different combinations
+Try changing the demoEmail.txt fail to encrypt and decrypt your own messages!
+
+This version of cipher uses two keys. You must know both to be able to decrypt the secret message.
 
 NOTE: they key for encryption and decryption must match
 
