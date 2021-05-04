@@ -147,7 +147,7 @@ def caesarDecrypt(input, key=0):
     return decrypted
 
 
-def uwlEncrypt(input, key=0):
+def uwlEncrypt(input, key=0, password=None):
     input = caesarEncrypt(input, key)
 
     encrypted = ''
@@ -171,18 +171,11 @@ def uwlDecrypt(encrypted, key=0):
 
     return decrypted
 
+
 f = open("demoEmail.txt", "r")
 
 encryptedEmail = uwlEncrypt(f.read(), 1)
 
-print(uwlDecrypt(encryptedEmail, 1))
+print(encryptedEmail)
 
-# message = ""
-#
-# secret = uwlEncrypt(message, key)
-#
-# print('ABC 123 * encrypted:')
-# print(secret)
-#
-# print('ABC 123 * decrypted:')
-# print(uwlDecrypt(secret, key))
+print(uwlDecrypt(encryptedEmail, 1))
