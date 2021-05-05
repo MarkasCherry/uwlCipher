@@ -130,50 +130,45 @@ library = [
 ]
 
 
-def caesarEncrypt(message, key=0):
-    result = ""
-    for x in message:
-        result += chr((ord(x) + key) % 128)
-
-    return result
-
-
-def caesarDecrypt(input, key=0):
-    decrypted = ""
-
-    for x in input:
-        decrypted += chr((ord(x) - key) % 128)
-
-    return decrypted
-
-
-def uwlEncrypt(input, firstKey=0, secondKey=0):
-    input = caesarEncrypt(input, secondKey)
-
-    encrypted = ''
-
-    for x in input:
-        encrypted += library[(ord(x) + firstKey) % 128] + " "
-
+def uwlEncrypt(message, locks=[0]):
+    for key in locks:
+        encrypted = ''
+        for char in message:
+            encrypted += library[(ord(char) + key) % 128] + " "
+        message = encrypted
     return encrypted
 
 
-def uwlDecrypt(encrypted, firstKey=0, secondKey=0):
-    decrypted = ''
-
+def uwlDecrypt(encrypted, locks=[0]):
     try:
-        for x in encrypted.split():
-            decrypted += chr((library.index(x) - firstKey) % 128)
+        for key in locks[::-1]:
+            decrypted = ''
+            for word in encrypted.split():
+                decrypted += chr((library.index(word) - key) % 128)
+            encrypted = decrypted
     except:
-        return 'Message cannot be decrypted'
+        return 'error'
 
-    return caesarDecrypt(decrypted, secondKey)
-
+    return decrypted
 
 f = open("demoEmail.txt", "r")
 
-encryptedEmail = uwlEncrypt(f.read(), 156, 663)
+encryptedEmail = uwlEncrypt(f.read(), [3, 8, 9])
 
 print(encryptedEmail)
 
-print(uwlDecrypt(encryptedEmail, 156, 663))
+print(uwlDecrypt(encryptedEmail, [3, 8, 9]))
+
+
+# BRUTE FORCE HACKING
+# import time
+#
+# start = time.time()
+# for i in range(128):
+#     for j in range(128):
+#         for k in range(128):
+#             print(uwlDecrypt(encryptedEmail, [i, j, k]))
+#             print('--------------------------------------------------------')
+#             print('Time took to decrypt:', time.time() - start)
+#             print('Keys used:', i, ', ', j, ', ', k)
+#             print('--------------------------------------------------------')
