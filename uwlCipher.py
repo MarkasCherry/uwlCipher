@@ -147,7 +147,7 @@ def uwlDecrypt(encrypted, locks=[0]):
                 decrypted += chr((library.index(word) - key) % 128)
             encrypted = decrypted
     except:
-        return 'error'
+        return 'Message can not be decrypted'
 
     return decrypted
 
