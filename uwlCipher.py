@@ -151,6 +151,7 @@ def uwlDecrypt(encrypted, locks=[0]):
 
     return decrypted
 
+
 f = open("demoEmail.txt", "r")
 
 encryptedEmail = uwlEncrypt(f.read(), [3, 8, 9])
@@ -158,7 +159,6 @@ encryptedEmail = uwlEncrypt(f.read(), [3, 8, 9])
 print(encryptedEmail)
 
 print(uwlDecrypt(encryptedEmail, [3, 8, 9]))
-
 
 ## BRUTE FORCE HACKING
 # import time
